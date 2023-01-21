@@ -3,9 +3,10 @@ import { Fragment } from "react";
 
 type IProps = {
   open: boolean;
+  message: string;
 };
 
-const TimesUp = ({ open }: IProps) => {
+const ResultModal = ({ open, message }: IProps) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -42,7 +43,7 @@ const TimesUp = ({ open }: IProps) => {
                 <div>
                   <div className="text-center">
                     <Dialog.Title as="h2" className="text-lg font-medium leading-6 text-gray-900">
-                      Times is up!
+                      {message}
                     </Dialog.Title>
                   </div>
                 </div>
@@ -66,4 +67,4 @@ const TimesUp = ({ open }: IProps) => {
   );
 };
 
-export default TimesUp;
+export default ResultModal;
