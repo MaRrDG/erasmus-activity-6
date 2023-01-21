@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'teko': ['Teko', 'sans-serif']
+    },
   },
   plugins: [],
 }
