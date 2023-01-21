@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Countdown, { CountdownApi } from "react-countdown";
 import Box from "./components/box";
 import DropBox from "./components/dropBox";
-import ResultModal from "./components/resultModal";
+import ResultModal from "./components/modal";
 
 type Data = {
   dragged: boolean;
