@@ -82,10 +82,6 @@ const App = () => {
     }
   };
 
-  const CountdownContainer = React.memo(() => {
-    return <Countdown ref={setRef} date={startDate.current + 15000} renderer={renderer} />;
-  });
-
   return (
     <div className="w-full h-full p-12 pb-0 flex flex-col justify-between font-teko overflow-hidden">
       <ResultModal open={open} message={modalMessage} />
@@ -138,7 +134,7 @@ const App = () => {
         </div>
       </main>
       <footer className="mt-12 w-full flex justify-center items-end">
-        <CountdownContainer />
+        <Countdown ref={setRef} date={startDate.current + 15000} renderer={renderer} />
       </footer>
     </div>
   );
