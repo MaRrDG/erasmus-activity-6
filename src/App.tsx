@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useMemo, useState } from "react";
 import Countdown, { CountdownApi } from "react-countdown";
 import Box from "./components/box";
 import DropBox from "./components/dropBox";
@@ -35,12 +36,15 @@ const App = () => {
       name: "CONTINUOUS DATA",
     },
   });
+
   const [result, setResult] = useState({
     result: true,
     boxCorrected: 4,
   });
+
   const [open, setOpen] = useState(false);
   const [timesUp, setTimesUp] = useState(false);
+  const startDate = React.useRef(Date.now());
   let countdownApi: CountdownApi | null = null;
 
   const setRef = (countdown: Countdown | null): void => {
@@ -89,6 +93,10 @@ const App = () => {
     }
   };
 
+  const CountdownContainer = React.memo(() => {
+    return <Countdown ref={setRef} date={startDate.current + 15000} renderer={renderer} />;
+  });
+
   return (
     <div className="w-full h-full p-12 pb-0 flex flex-col justify-between font-teko overflow-hidden">
       <ResultModal open={open} result={result.boxCorrected} />
@@ -132,7 +140,7 @@ const App = () => {
         </div>
       </main>
       <footer className="mt-12 w-full flex justify-center items-end">
-        <Countdown ref={setRef} date={Date.now() + 15000} renderer={renderer} />
+        <CountdownContainer />
       </footer>
     </div>
   );
