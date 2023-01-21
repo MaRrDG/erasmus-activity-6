@@ -3,10 +3,10 @@ import { Fragment } from "react";
 
 type IProps = {
   open: boolean;
-  result: number;
+  message: string;
 };
 
-const ResultModal = ({ open, result }: IProps) => {
+const ResultModal = ({ open, message }: IProps) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -43,9 +43,7 @@ const ResultModal = ({ open, result }: IProps) => {
                 <div>
                   <div className="text-center">
                     <Dialog.Title as="h2" className="text-lg font-medium leading-6 text-gray-900">
-                      {result === 4
-                        ? "Congratulations you put all type of data in the correct box!"
-                        : `You put in the boxes correctly ${result}/4 type of data!`}
+                      {message}
                     </Dialog.Title>
                   </div>
                 </div>

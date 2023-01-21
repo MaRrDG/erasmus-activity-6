@@ -1,15 +1,15 @@
 import React from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Countdown, { CountdownApi } from "react-countdown";
 import Box from "./components/box";
 import DropBox from "./components/dropBox";
-import ResultModal from "./components/ResultModal";
-import TimesUp from "./components/TimesUpModal";
+import ResultModal from "./components/resultModal";
 
 type Data = {
   dragged: boolean;
   name: string;
   box?: string;
+  linkedBox: string;
 };
 
 const App = () => {
@@ -22,28 +22,32 @@ const App = () => {
     nominalData: {
       dragged: false,
       name: "NOMINAL DATA",
+      linkedBox: "QUALITATIVE",
     },
     discreteData: {
       dragged: false,
       name: "DISCRETE DATA",
+      linkedBox: "QUANTITATIVE",
     },
     ordinalData: {
       dragged: false,
       name: "ORDINAL DATA",
+      linkedBox: "QUALITATIVE",
     },
     continousData: {
       dragged: false,
       name: "CONTINUOUS DATA",
+      linkedBox: "QUANTITATIVE",
     },
   });
 
   const [result, setResult] = useState({
     result: true,
-    boxCorrected: 4,
+    resultNumber: 4,
   });
 
   const [open, setOpen] = useState(false);
-  const [timesUp, setTimesUp] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const startDate = React.useRef(Date.now());
   let countdownApi: CountdownApi | null = null;
 
@@ -55,35 +59,20 @@ const App = () => {
 
   useEffect(() => {
     if (Object.values(droppedBox).filter((elem) => elem.dragged && elem.box).length > 3) {
-      let resultNumber = 4;
-
-      if (droppedBox.nominalData.dragged && droppedBox.nominalData.box !== "QUALITATIVE") {
-        resultNumber = resultNumber - 1;
-      }
-      if (droppedBox.ordinalData.dragged && droppedBox.ordinalData.box !== "QUALITATIVE") {
-        resultNumber = resultNumber - 1;
-      }
-      if (droppedBox.discreteData.dragged && droppedBox.discreteData.box !== "QUANTITATIVE") {
-        resultNumber = resultNumber - 1;
-      }
-      if (droppedBox.continousData.dragged && droppedBox.continousData.box !== "QUANTITATIVE") {
-        resultNumber = resultNumber - 1;
-      }
-
-      if (resultNumber < 4) {
-        setResult({
-          result: false,
-          boxCorrected: resultNumber,
-        });
-      }
       countdownApi!.pause();
+      setModalMessage(
+        result.resultNumber === 4
+          ? "Congratulations you put all type of data in the correct box!"
+          : `You put in the boxes correctly ${result.resultNumber}/4 type of data!`
+      );
       setOpen(true);
     }
   }, [droppedBox]);
 
   const renderer = ({ seconds, completed }: any) => {
     if (completed) {
-      setTimesUp(true);
+      setModalMessage("Time is up!");
+      setOpen(true);
     } else {
       return (
         <p className="font-teko mt-12 lg:mt-0 text-[85px]">
@@ -99,8 +88,7 @@ const App = () => {
 
   return (
     <div className="w-full h-full p-12 pb-0 flex flex-col justify-between font-teko overflow-hidden">
-      <ResultModal open={open} result={result.boxCorrected} />
-      <TimesUp open={timesUp} />
+      <ResultModal open={open} message={modalMessage} />
       <header className="w-full h-[90px] font-teko flex">
         <div className="w-[9px] h-full bg-[#0A8DAA]"></div>
         <div className="flex justify-center flex-col gap-y-6 mt-1 ml-[4px]">
@@ -118,6 +106,16 @@ const App = () => {
                 name={value.name}
                 key={idx}
                 setDroppedBox={(name: string, dropbox: string) => {
+                  if (value.linkedBox !== dropbox.split(" ")[1]) {
+                    setResult((prev) => {
+                      return {
+                        ...prev,
+                        result: false,
+                        resultNumber: prev.resultNumber - 1,
+                      };
+                    });
+                  }
+
                   setDroppedBox((prev) => {
                     return {
                       ...prev,
