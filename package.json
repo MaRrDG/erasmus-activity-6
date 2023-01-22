@@ -1,8 +1,10 @@
 {
-  "name": "activity-6",
+  "name": "Erasmus-Activity-6",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": "Dragut Mario",
+  "description": "Project made for Erasmus Activity 6",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
