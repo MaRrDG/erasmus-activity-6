@@ -120,7 +120,7 @@ const App = () => {
                 </div>
             </main>
             <footer className="flex mt-auto justify-center items-center">
-                <Countdown ref={setRef} date={startDate.current + 15000} renderer={renderer} />
+                <Countdown ref={setRef} date={startDate.current + 30000} renderer={renderer} />
             </footer>
         </div>
     );
