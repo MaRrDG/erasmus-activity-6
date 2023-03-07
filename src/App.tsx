@@ -80,7 +80,7 @@ const App = () => {
             );
         }
     };
-
+    if(!da) return null;
     return (
         <div className="w-full h-screen p-12 pb-0 flex flex-col font-teko overflow-hidden relative">
              <iframe
