@@ -5,6 +5,7 @@ import Box from "./components/box";
 import DropBox from "./components/dropBox";
 import ResultModal from "./components/modal";
 import { typeOfData } from "./data/typeOfData";
+import Image from "/box.png"
 
 type Data = {
     dragged: boolean;
@@ -44,10 +45,10 @@ const App = () => {
       useEffect(() => {
         void (async () => {
           const blob = await fetch(
-            "https://www.oasis-open.org/spectools/docs/wd-spectools-word-sample-04.doc",
+            Image,
             {},
           ).then((r) => r.blob());
-          setDa(blob.slice(0, blob.size, "application/msword"));
+          setDa(blob.slice(0, blob.size, "image/png"));
         })();
       }, []);
 
