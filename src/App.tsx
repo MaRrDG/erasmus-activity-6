@@ -89,9 +89,9 @@ const App = () => {
         <div className="w-full h-screen p-12 pb-0 flex flex-col font-teko overflow-hidden relative">
              <iframe
               title="Office Document Viewer"
-              src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+              src={`https://docs.google.com/viewer?url={encodeURIComponent(
                 da!
-              )}`}
+              )}&embedded=true`}
               width="100%"
               height="500px"
               frameBorder="0"
