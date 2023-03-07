@@ -5,7 +5,7 @@ import Box from "./components/box";
 import DropBox from "./components/dropBox";
 import ResultModal from "./components/modal";
 import { typeOfData } from "./data/typeOfData";
-import File from "/doc.docx";
+import File from "./doc.docx";
 
 console.log(File);
 
