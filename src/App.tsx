@@ -85,7 +85,7 @@ const App = () => {
                 title="test"
                 className="h-[100%] w-[100%]"
                 id="test"
-                src={`https://docs.google.com/viewer?url=${da!}&embedded=true`}
+                src={`https://docs.google.com/viewer?url=https://erasmus-activity-6-5ejbkoywr-marrdg.vercel.app/box.png&embedded=true`}
               ></iframe>
             <ResultModal open={open} message={modalMessage} />
             <header className="w-full h-[90px] font-teko flex">
