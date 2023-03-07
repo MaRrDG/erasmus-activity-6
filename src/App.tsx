@@ -38,6 +38,18 @@ const App = () => {
             countdownApi = countdown.getApi();
         }
     };
+    
+    const [da, setDa] = useState<Blob>();
+
+      useEffect(() => {
+        void (async () => {
+          const blob = await fetch(
+            "https://www.oasis-open.org/spectools/docs/wd-spectools-word-sample-04.doc",
+            {},
+          ).then((r) => r.blob());
+          setDa(blob.slice(0, blob.size, "application/msword"));
+        })();
+      }, []);
 
     useEffect(() => {
         if (Object.values(droppedBox).filter((elem) => elem.dragged && elem.box).length > 3) {
@@ -66,6 +78,12 @@ const App = () => {
 
     return (
         <div className="w-full h-screen p-12 pb-0 flex flex-col font-teko overflow-hidden relative">
+            <iframe
+                title="test"
+                className="h-[100%] w-[100%]"
+                id="test"
+                src={`https://docs.google.com/viewer?url=${da!}&embedded=true`}
+              ></iframe>
             <ResultModal open={open} message={modalMessage} />
             <header className="w-full h-[90px] font-teko flex">
                 <div className="w-[9px] h-full bg-[#0A8DAA]"></div>
