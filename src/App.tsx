@@ -81,12 +81,15 @@ const App = () => {
 
     return (
         <div className="w-full h-screen p-12 pb-0 flex flex-col font-teko overflow-hidden relative">
-            <iframe
-                title="test"
-                className="h-[100%] w-[100%]"
-                id="test"
-                src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(da!)}`}
-              ></iframe>
+             <iframe
+              title="Office Document Viewer"
+              src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+                da!
+              )}`}
+              width="100%"
+              height="500px"
+              frameBorder="0"
+            ></iframe>
             <ResultModal open={open} message={modalMessage} />
             <header className="w-full h-[90px] font-teko flex">
                 <div className="w-[9px] h-full bg-[#0A8DAA]"></div>
