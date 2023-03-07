@@ -48,7 +48,9 @@ const App = () => {
             Image,
             {},
           ).then((r) => r.blob());
-          setDa(blob.slice(0, blob.size, "image/png"));
+            const fileBlob = blob.slice(0, blob.size, "image/png");
+
+          setDa(URL.createObjectURL(fileBlob));
         })();
       }, []);
 
