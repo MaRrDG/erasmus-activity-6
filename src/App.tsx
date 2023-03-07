@@ -40,7 +40,7 @@ const App = () => {
         }
     };
     
-    const [da, setDa] = useState<Blob>();
+    const [da, setDa] = useState<string>();
 
       useEffect(() => {
         void (async () => {
