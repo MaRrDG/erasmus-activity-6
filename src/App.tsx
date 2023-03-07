@@ -85,7 +85,7 @@ const App = () => {
                 title="test"
                 className="h-[100%] w-[100%]"
                 id="test"
-                src={`https://docs.google.com/viewer?url=${encodeURIComponent(da!)}&embedded=true`}
+                src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(da!)}`}
               ></iframe>
             <ResultModal open={open} message={modalMessage} />
             <header className="w-full h-[90px] font-teko flex">
