@@ -35,7 +35,7 @@ const App = () => {
             name: "NOMINAL DATA",
             linkedBox: "QUALITATIVE",
             description1: t("nominalDesc1"),
-            description2: t("nominalDesc1"),
+            description2: t("nominalDesc2"),
         },
         discreteData: {
             dragged: false,
@@ -78,7 +78,7 @@ const App = () => {
                 name: "NOMINAL DATA",
                 linkedBox: "QUALITATIVE",
                 description1: t("nominalDesc1"),
-                description2: t("nominalDesc1"),
+                description2: t("nominalDesc2"),
             },
             discreteData: {
                 dragged: false,
@@ -121,15 +121,17 @@ const App = () => {
     }, [droppedBox]);
 
     const renderer = ({ seconds, completed }: any) => {
-        if (completed) {
-            setModalMessage(t("timeIsUp") as string);
-            setOpen(true);
-        } else {
-            return (
-                <p className="font-teko mt-12 lg:mt-0 text-[85px] uppercase">
-                    {t("timeLeft")}: <span className="text-[#0A8DAA]">{seconds} S</span>
-                </p>
-            );
+        if (window.innerWidth >= 1024) {
+            if (completed) {
+                setModalMessage(t("timeIsUp") as string);
+                setOpen(true);
+            } else {
+                return (
+                    <p className="font-teko mt-12 lg:mt-0 text-[85px] uppercase">
+                        {t("timeLeft")}: <span className="text-[#0A8DAA]">{seconds} S</span>
+                    </p>
+                );
+            }
         }
     };
 
@@ -143,12 +145,7 @@ const App = () => {
                     open={langSelector}
                     onClose={(lang: string) => {
                         i18n.changeLanguage(lang);
-
-                        setTimeout(() => {
-                            i18n.changeLanguage(lang);
-
-                            setLangSelector(false);
-                        }, 500);
+                        setLangSelector(false);
 
                         if (window.innerWidth >= 1024) {
                             countdownApi!.start();
