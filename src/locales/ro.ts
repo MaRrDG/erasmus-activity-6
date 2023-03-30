@@ -1,9 +1,9 @@
 export const ro = {
-    dragItems: "Trageți fiecare tip de date în caseta corectă",
+    dragItems: "Trageți fiecare tip de date în cutia corectă",
     timeIsUp: "Timpul s-a terminat!",
     retry: "Incearca din nou",
-    congrats: "Felicitări ai pus toate tipurile de date în caseta corectă!",
-    wrong: "Ați pus corect în cutii",
+    congrats: "Felicitări ai pus toate tipurile de date în cutia corectă!",
+    wrong: "Ați introdus corect în cutii",
     typeOfData: "tipuri de date",
     timeLeft: "Timp ramas",
     nominalDesc1: `„Numele „nominal” provine de la numele latin „nomen”, care înseamnă „nume”. Cu ajutorul datelor nominale,
