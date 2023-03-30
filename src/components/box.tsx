@@ -18,7 +18,7 @@ interface DropResult {
 const Box = ({ name, setDroppedBox, text1, text2 }: BoxProps) => {
     const [showInfoBox, setShowInfoBox] = useState(false);
 
-    const [{ opacity }, drag] = useDrag(
+    const [{ isDragging }, drag, preview] = useDrag(
         () => ({
             type: "box",
             item: { name },
@@ -34,29 +34,34 @@ const Box = ({ name, setDroppedBox, text1, text2 }: BoxProps) => {
                 }
             },
             collect: (monitor: DragSourceMonitor) => ({
-                opacity: monitor.isDragging() ? 0.4 : 1,
+                isDragging: !!monitor.isDragging(),
             }),
         }),
         [name]
     );
 
+    const visibility = isDragging ? "hidden" : "visible";
+
     return (
-        <div
-            ref={drag}
-            onMouseEnter={() => {
-                setShowInfoBox(true);
-            }}
-            onMouseLeave={() => {
-                setShowInfoBox(false);
-            }}
-            onDrag={() => {
-                setShowInfoBox(false);
-            }}
-            className="relative w-[234px] h-[82px] bg-[#0A8DAA] flex items-center justify-center text-white text-[37px] rounded-[33px] mt-[12px] lg:mt-0 lg:ml-[66px] cursor-pointer"
-        >
-            {showInfoBox ? <InfoBox text1={text1} text2={text2} /> : null}
-            {name}
-        </div>
+        <>
+            <div
+                style={{ visibility }}
+                ref={drag}
+                onMouseEnter={() => {
+                    setShowInfoBox(true);
+                }}
+                onMouseLeave={() => {
+                    setShowInfoBox(false);
+                }}
+                onDrag={() => {
+                    setShowInfoBox(false);
+                }}
+                className={`relative w-[234px] h-[82px] bg-[#0A8DAA] flex items-center justify-center text-white text-[37px] rounded-[33px] mt-[12px] lg:mt-0 lg:ml-[66px] cursor-pointer`}
+            >
+                {showInfoBox ? <InfoBox text1={text1} text2={text2} /> : null}
+                {name}
+            </div>
+        </>
     );
 };
 

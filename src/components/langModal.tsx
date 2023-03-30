@@ -1,24 +1,17 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import { useTranslation } from "react-i18next";
+import { Fragment, useState } from "react";
 
 type IProps = {
     open: boolean;
-    message: string;
+    onClose: (lang: string) => void;
 };
 
-const ResultModal = ({ open, message }: IProps) => {
-    const { t } = useTranslation();
+const LangModal = ({ open, onClose }: IProps) => {
+    const [lang, setLang] = useState("RO");
 
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog
-                as="div"
-                className="relative z-10"
-                onClose={() => {
-                    window.location.reload();
-                }}
-            >
+            <Dialog as="div" className="relative z-10" onClose={() => {}}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -28,7 +21,7 @@ const ResultModal = ({ open, message }: IProps) => {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                    <div className="fixed inset-0 bg-gray-300 transition-opacity" />
                 </Transition.Child>
 
                 <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -44,21 +37,34 @@ const ResultModal = ({ open, message }: IProps) => {
                         >
                             <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                                 <div>
-                                    <div className="text-center">
-                                        <Dialog.Title as="h2" className="text-lg font-medium leading-6 text-gray-900">
-                                            {message}
-                                        </Dialog.Title>
-                                    </div>
+                                    <label
+                                        htmlFor="location"
+                                        className="block text-sm font-medium leading-6 text-gray-900"
+                                    >
+                                        Selecteaza limba / Select your language
+                                    </label>
+                                    <select
+                                        id="location"
+                                        name="location"
+                                        className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        value={lang}
+                                        onChange={(e) => {
+                                            setLang(e.target.value);
+                                        }}
+                                    >
+                                        <option>RO</option>
+                                        <option>EN</option>
+                                    </select>
                                 </div>
                                 <div className="mt-5 sm:mt-6">
                                     <button
                                         type="button"
                                         className="inline-flex w-full justify-center rounded-md border border-transparent bg-[#0A8DAA] px-4 py-2 text-base font-medium text-white shadow-sm sm:text-sm"
                                         onClick={() => {
-                                            window.location.reload();
+                                            onClose(lang.toLocaleLowerCase());
                                         }}
                                     >
-                                        {t("retry")}
+                                        Continue
                                     </button>
                                 </div>
                             </Dialog.Panel>
@@ -70,4 +76,4 @@ const ResultModal = ({ open, message }: IProps) => {
     );
 };
 
-export default ResultModal;
+export default LangModal;
